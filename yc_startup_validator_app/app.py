@@ -15,7 +15,9 @@ st.set_page_config(
 # -----------------------------
 # Load model artifacts
 # -----------------------------
-MODEL_DIR = Path("model")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model"
+
 vectorizer_path = MODEL_DIR / "vectorizer.pkl"
 model_path = MODEL_DIR / "success_model.pkl"
 
