@@ -91,3 +91,8 @@ The YC startup landscape is increasingly defined by:
 - **Scalability through intelligence, not headcount**
 
 The winners are building systems that *act*, not just *assist*.
+
+# An App that validate startup idea
+I also make an app that validate startups based on their descriptions
+
+https://yc-startup-validator.streamlit.app/
