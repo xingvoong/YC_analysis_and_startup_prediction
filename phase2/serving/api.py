@@ -11,12 +11,21 @@ Endpoints:
 """
 
 import logging
+import sys
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+sys.path.append(str(Path(__file__).resolve().parents[1] / "observability"))
+try:
+    from logger import log_prediction
+    _logging_enabled = True
+except ImportError:
+    _logging_enabled = False
 
 from model_loader import get_artifacts
 from predictor import run_prediction
@@ -168,4 +177,16 @@ def predict(request: PredictRequest):
     )
 
     logger.info("Score: %d | Level: %s", result["score"], result["level"])
+
+    if _logging_enabled:
+        try:
+            log_prediction(
+                score=result["score"],
+                level=result["level"],
+                desc_len=len(request.description),
+                model_version=result["model_version"],
+            )
+        except Exception:
+            pass  # never let logging break the prediction path
+
     return PredictResponse(**result)
