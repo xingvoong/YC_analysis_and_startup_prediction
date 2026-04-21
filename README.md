@@ -99,6 +99,22 @@ https://yc-startup-validator.streamlit.app/
 
 ---
 
+# Phase 2 — Production ML Serving
+
+The analysis didn't stop at insights. The model got deployed.
+
+Phase 2 wraps the classifier in a full production ML system — REST API, experiment tracking, drift monitoring, and an automated retraining pipeline. It's the difference between a notebook result and something that keeps running.
+
+→ [See Phase 2 README](phase2/README.md)
+
+**What's running:**
+- `POST /predict` — score any startup description in real time
+- MLflow — track and compare every training run
+- Drift dashboard — watch prediction distributions shift over time
+- Retraining pipeline — fetch new data, retrain, promote if metrics improve
+
+---
+
 # Project Wrap-up
 
 ## What This Project Built
