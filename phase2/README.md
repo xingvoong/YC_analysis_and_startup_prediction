@@ -77,18 +77,17 @@ phase2/
 ### Local (no Docker)
 
 ```bash
-# Component 1 — API
-cd phase2/serving
-pip install -r requirements.txt
+# Component 1 — API → http://localhost:8000/docs
+cd phase2/serving && pip install -r requirements.txt
 uvicorn api:app --host 0.0.0.0 --port 8000 --reload
 
-# Component 2 — MLflow UI
-mlflow server --host 0.0.0.0 --port 5000
+# Component 2 — MLflow UI → http://localhost:5000
+mlflow server --host 127.0.0.1 --port 5000
 
 # Component 2 — Train with tracking (run from project root)
 python3.11 phase2/lifecycle/train_tracked.py
 
-# Component 4 — Drift dashboard
+# Component 4 — Drift dashboard → http://localhost:8501
 streamlit run phase2/observability/dashboard.py
 
 # Component 5 — Retrain pipeline (run from project root)
