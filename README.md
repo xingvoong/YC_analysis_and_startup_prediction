@@ -96,3 +96,39 @@ The winners are building systems that *act*, not just *assist*.
 I also make an app that validate startups based on their descriptions
 
 https://yc-startup-validator.streamlit.app/
+
+---
+
+# Project Wrap-up
+
+## What This Project Built
+
+This is a two-phase ML system — analysis first, then production serving.
+
+**Phase 1** was pure analysis: scrape YC companies, cluster them by description using TF-IDF, label domains by hand, and measure which ones actually scale. The output was a ranked view of what types of startups succeed — and what's noise.
+
+**Phase 2** turned that model into a running system. A FastAPI service scores startup descriptions in real time, MLflow tracks every training run, a SQLite database logs every prediction, and a Streamlit dashboard watches for drift. A retraining pipeline ties it together — fetch new data, retrain, compare metrics, promote if better.
+
+## What ML System This Represents
+
+This is a classic **supervised text classification pipeline** with a full MLOps loop:
+
+- **Model**: Logistic Regression on TF-IDF features
+- **Training**: Tracked and versioned with MLflow
+- **Serving**: REST API with real-time inference
+- **Observability**: Prediction logging + drift detection
+- **Lifecycle**: Automated retraining with model promotion
+
+In industry terms, this is the core pattern behind any production NLP classifier — spam filters, content moderation, lead scoring, support ticket routing. The model is simple, but the infrastructure around it is what makes it production-grade.
+
+## Takeaways
+
+1. **The model is the easy part.** TF-IDF + LogisticRegression trains in seconds and performs well. The hard work is everything around it — serving, monitoring, retraining.
+
+2. **AI Platforms and B2B SaaS dominate YC.** Success rates of 19–25% vs single digits for consumer startups. The data is clear: build for businesses, not consumers.
+
+3. **AI agents are eating the post-2022 batch.** This isn't a trend — it's a structural shift. Software is becoming a worker, not just a tool.
+
+4. **MLOps is infrastructure, not magic.** Protobuf version conflicts, port collisions, three services that need to coordinate — none of that goes away with better tooling. You still have to understand what's running and why.
+
+The winners in this dataset build systems that act. This project does the same.
